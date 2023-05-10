@@ -4,6 +4,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,9 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     $posts = [];
     if (auth()->check()) {
-        $posts = auth()->user()->usersCoolPosts()->latest()->get();
+        $posts = auth()->user() instanceof \App\Models\User ? auth()->User::user()->usersCoolPosts()->latest()->get() : [];
     }
+
     return view('home', ['posts' => $posts]);
 });
 
