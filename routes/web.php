@@ -20,7 +20,7 @@ use App\Models\User;
 Route::get('/', function () {
     $posts = [];
     if (auth()->check()) {
-        $posts = auth()->user() instanceof \App\Models\User ? auth()->User::user()->usersCoolPosts()->latest()->get() : [];
+        $posts = auth()->user()->usersCoolPosts()->latest()->get();
     }
 
     return view('home', ['posts' => $posts]);
